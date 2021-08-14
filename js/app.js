@@ -14,7 +14,7 @@ let clickAllowed = 3;
 
 function Goat(name, fileExtension = 'jpg') {
   this.name = name;
-  this.src = `images/${name}.${fileExtension}`;
+  this.src = `img/${name}.${fileExtension}`;
   this.views = 0;
   this.clicks = 0;
   allGoats.push(this);
