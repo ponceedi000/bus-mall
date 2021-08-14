@@ -7,7 +7,7 @@ I built a web application for "BusMall" who wants to do market analysis on propo
 ### Author: Ediberto Ponce/Joshua Huston
 
 ### Links and Resources
-* [submission PR](http://xyz.com)
+* [submission PR](https://github.com/ponceedi000/bus-mall/pull/1)
 * [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)
 
 ### Reflections and Comments
