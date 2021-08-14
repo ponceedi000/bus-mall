@@ -10,7 +10,7 @@ let image1 = document.querySelector('section img:first-child');
 let image2 = document.querySelector('section img:nth-child(2)');
 let image3 = document.querySelector('section img:nth-child(3)');
 let clicks = 0;
-let clickAllowed = 3;
+let clickAllowed = 25;
 
 function Product(name, fileExtension = 'jpg') {
   this.name = name;
