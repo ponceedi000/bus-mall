@@ -1,4 +1,90 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #2EC4B6;
+    color:#F6F7F8;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    color: #F6F7F8;
+    text-align: center;
+  }
+  h3 {
+    text-align: center;
+  }
+  
+  header {
+    width: 900px;
+    margin: 2rem auto 1rem;
+  }
+  
+  main {
+    width: 900px;
+    margin: 0 auto 2rem;
+  }
+  
+  ul li {
+    line-height: 160%;
 
+  }
+  
+  /* -- VOTING BLOCK -- */
+  
+  section {
+    background-color: #20A4F3;
+    margin: 1rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #F6F7F8;
+    border-radius: 20px 5px 20px 5px;
+  }
+  
+  section img {
+    width: 30%;
+    margin: 1rem;
+    border: 5px solid transparent;
+    border-radius: 20px 5px 20px 5px;
+  }
+  section img:hover {
+    transition: all .4s ease-in-out; 
+    transform: scale(1.1);
+    opacity: 70%; 
+  }
+  
+  section img:hover {
+    border: 5px solid rgb(169, 108, 28);
+    cursor: pointer;
+  }
+  
+  /* -- button -- */
+  
+  section + div {
+    background-color: rgba(128, 128, 128, 0.734);
+    color: lightgrey;
+    padding: .5rem 1rem;
+    width: max-content;
+    font-size: .8rem;
+    pointer-events: none;
+  }
+  
+  section + div.clicks-allowed {
+    background-color: #FF3366;
+    color: white;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  
+  section + div.clicks-allowed:hover {
+    background-color: rgb(211, 187, 175)
+  }
 
 
 
