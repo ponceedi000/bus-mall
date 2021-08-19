@@ -64,27 +64,15 @@
     cursor: pointer;
   }
   
-  /* -- button -- */
+/* My Chart */
+
+canvas {
+  width: 80%;  
+  height: 50%;
+  margin: auto;
+}
   
-  section + div {
-    background-color: rgba(128, 128, 128, 0.734);
-    color: lightgrey;
-    padding: .5rem 1rem;
-    width: max-content;
-    font-size: .8rem;
-    pointer-events: none;
-  }
-  
-  section + div.clicks-allowed {
-    background-color: #FF3366;
-    color: white;
-    cursor: pointer;
-    pointer-events: auto;
-  }
-  
-  section + div.clicks-allowed:hover {
-    background-color: rgb(211, 187, 175)
-  }
+
 
 
 
