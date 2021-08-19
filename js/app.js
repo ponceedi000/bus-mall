@@ -4,7 +4,7 @@
 
 let allProducts = [];
 let clicks = 0;
-let clickAllowed = 3;
+let clickAllowed = 25;
 let numberOfUniqueIndexes = 6;
 
 let myContainer = document.querySelector('section');
