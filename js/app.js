@@ -1,89 +1,27 @@
 'use strict';
 
-
 // global varriables
+
 let allProducts = [];
+let clicks = 0;
+let clickAllowed = 3;
+let numberOfUniqueIndexes = 6;
 
 let myContainer = document.querySelector('section');
-let myButton = document.querySelector('section + div');
 let image1 = document.querySelector('section img:first-child');
 let image2 = document.querySelector('section img:nth-child(2)');
 let image3 = document.querySelector('section img:nth-child(3)');
-let clicks = 0;
-let clickAllowed = 25;
+let indexArray = [];
+
 
 function Product(name, fileExtension = 'jpg') {
   this.name = name;
   this.src = `img/${name}.${fileExtension}`;
-  this.views = 0;
   this.clicks = 0;
+  this.views = 0;
   allProducts.push(this);
 }
 
-function selectRandomProduct() {
-  return Math.floor(Math.random() * allProducts.length);
-}
-
-function renderProducts() {
-  let productArray = [];
-  let product1 = selectRandomProduct();
-  productArray.push(product1); // productArray = [product1] (At this point)
-  let product2 = selectRandomProduct();
-    if (productArray.includes(product2)) {
-      while (productArray.includes(product2) === true) {
-      product2 = selectRandomProduct();
-    }
-  }
-  productArray.push(product2); // product array = [product1, product2] (At this point)
-  let product3 = selectRandomProduct();
-    if (productArray.includes(product3)) {
-      while (productArray.includes(product3) === true) {
-      product3 = selectRandomProduct();
-  }
-}
-productArray.push(product3); // product array = [product1, product2, product3] (At this point)
-
-image1.src = allProducts[product1].src;
-image2.src = allProducts[product2].src;
-image3.src = allProducts[product3].src;
-image1.alt = allProducts[product1].name;
-image2.alt = allProducts[product2].name;
-image3.alt = allProducts[product3].name;
-allProducts[product1].views++;
-allProducts[product2].views++;
-allProducts[product3].views++;
-}
-//---End of renderProducts function---//
-
-function handleProductClick(event) {
-  if (event.target === myContainer) {
-    alert('Please click on an image');
-  }
-  clicks++;
-  let clickProduct = event.target.alt;
-  console.log(clickProduct);
-    for (let i = 0; i < allProducts.length; i++) {
-      if (clickProduct === allProducts[i].name) {
-        allProducts[i].clicks++;
-        break;
-    }
-  }
-  renderProducts();
-  if (clicks === clickAllowed) {
-    myButton.className = 'clicks-allowed';
-    myContainer.removeEventListener('click', handleProductClick);
-  }
-}
-//---End of handleProductClick function
-
-function renderResults() {
-  let ul = document.querySelector('ul');
-    for (let i = 0; i < allProducts.length; i++) {
-      let li = document.createElement('li')
-      li.textContent = `${allProducts[i].name} had ${allProducts[i].views} view and was clicked ${allProducts[i].clicks} times.`;
-      ul.appendChild(li);
-  }
-}
 new Product('bag');
 new Product('banana');
 new Product('bathroom');
@@ -104,50 +42,97 @@ new Product('unicorn')
 new Product('water-can')
 new Product('wine-glass')
 
+function selectRandomProduct() {
+  return Math.floor(Math.random() * allProducts.length);
+}
+
+function renderProducts() {
+  while (indexArray.length < numberOfUniqueIndexes) {
+    let randomNumber = selectRandomProduct();
+    if (!indexArray.includes(randomNumber)) {
+      indexArray.push(randomNumber);
+    }
+  }
+  console.log(indexArray)
+  let product1 = indexArray.shift();
+  let product2 = indexArray.shift();
+  let product3 = indexArray.shift();
+
+image1.src = allProducts[product1].src;
+image1.alt = allProducts[product1].name;
+allProducts[product1].views++;
+image2.src = allProducts[product2].src;
+image2.alt = allProducts[product2].name;
+allProducts[product2].views++;
+image3.src = allProducts[product3].src;
+image3.alt = allProducts[product3].name;
+allProducts[product3].views++;
+console.log(indexArray);
+}
+//---End of renderProducts function---//
+
+function handleProductClick(event) {
+  if (event.target === myContainer) {
+    alert('Please click on an image');
+  }
+  clicks++;
+  let clickedProduct = event.target.alt;
+    for (let i = 0; i < allProducts.length; i++) {
+      if (clickedProduct === allProducts[i].name) {
+        allProducts[i].clicks++;
+        break;
+    }
+  }
+  renderProducts();
+  if (clicks === clickAllowed) {
+    myContainer.removeEventListener('click', handleProductClick);
+    renderChart();
+  }
+}
 renderProducts();
 
-myContainer.addEventListener('click', handleProductClick);
-myButton.addEventListener('click', renderResults);
 
-
-
-
-
-
-<script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
+function renderChart() {
+  let productViews = [];
+  let productClicks = [];
+  let productNames = [];
+  for (let i = 0; i < allProducts.length; i++) {
+    productViews.push(allProducts[i].views);
+    productClicks.push(allProducts[i].clicks);
+    productNames.push(allProducts[i].name);
+    
+  }
+  //console.log(productClicks);
+  let chartObject = {
     type: 'bar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
+      labels: productNames,
+      datasets: [{
+        label: '# of Views',
+        data: productViews,
+        backgroundColor: '#FF3366',
+        borderColor: '#011627',
+        borderWidth: 1
+      },
+      {
+        label: '# of Clicks',
+        data: productClicks,
+        backgroundColor: '#20A4F3',
+        borderColor: '#011627',
+        borderWidth: 1
+      }
+      ]
     },
     options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
+      scales: {
+        y: {
+          beginAtZero: true
         }
+      }
     }
-});
-</script>
+  };
+  let ctx = document.getElementById('myChart').getContext('2d');
+  let myChart = new Chart(ctx, chartObject);
+}
+
+myContainer.addEventListener('click', handleProductClick);
