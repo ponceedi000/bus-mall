@@ -51,7 +51,7 @@
     width: 30%;
     margin: 1rem;
     border: 5px solid transparent;
-    border-radius: 20px 5px 20px 5px;
+    border-radius: 20px 8px 20px 8px;
   }
   section img:hover {
     transition: all .4s ease-in-out; 

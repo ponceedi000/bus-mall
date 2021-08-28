@@ -80,6 +80,7 @@ function getProducts() {
     allProducts = parsedProducts;
   }
 }
+// Event handler for Clicks
 function handleProductClick(event) {
   if (event.target === myContainer) {
     alert('Please click on an image');

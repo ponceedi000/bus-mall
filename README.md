@@ -2,7 +2,7 @@
 
 ## BusMall
 
-I built a web application for "BusMall" who wants to do market analysis on proposed products to test their potential customer interest… before actually putting them into the catalog and getting the manufacturing wheels in motion.
+I built a web application for "BusMall" who wants to do market analysis on proposed products to test their potential customer interest… before putting them into the catalog and getting the manufacturing wheels in motion.
 
 ### Author: Ediberto Ponce/Joshua Huston
 
